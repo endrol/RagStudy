@@ -3,10 +3,12 @@ from llama_index.core import Settings
 from llama_index.llms.openai import OpenAI
 from llama_index.core import VectorStoreIndex, SimpleDirectoryReader, StorageContext, load_index_from_storage
 import os
-from llama_index.graph_stores.nebula import NebulaGraphStore
-from llama_index.readers.web import SimpleWebPageReader
-from llama_index.core import KnowledgeGraphIndex, ServiceContext
 import time
+from llama_index.readers.web import SimpleWebPageReader
+
+# from llama_index.core import KnowledgeGraphIndex, ServiceContext
+# from llama_index.graph_stores.nebula import NebulaGraphStore
+
 
 os.environ["OPENAI_API_KEY"] = "YOUR KEY"
 # os.environ["NEBULA_USER"] = "root"

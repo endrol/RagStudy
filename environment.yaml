@@ -1,0 +1,14 @@
+name: RagStudy  # The name of the environment
+channels:
+  - defaults          # Channels from which to download packages
+  - conda-forge       # Optional, for additional packages not in defaults
+dependencies:
+  - python=3.9.16        # Python version you want to use
+  - pip               # Include pip if you need to install pip packages
+
+  # List of pip packages (if any)
+  - pip:
+    - streamlit
+    - llama-index      # Example of a pip-installed package
+    - llama-index-readers-web
+    - requests
