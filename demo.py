@@ -9,11 +9,11 @@ from llama_index.core import KnowledgeGraphIndex, ServiceContext
 import time
 
 os.environ["OPENAI_API_KEY"] = "YOUR KEY"
-os.environ["NEBULA_USER"] = "root"
-os.environ["NEBULA_PASSWORD"] = "nebula"  # default is "nebula"
-os.environ[
-    "NEBULA_ADDRESS"
-] = "127.0.0.1:9669"  # assumed we have NebulaGraph installed locally
+# os.environ["NEBULA_USER"] = "root"
+# os.environ["NEBULA_PASSWORD"] = "nebula"  # default is "nebula"
+# os.environ[
+#     "NEBULA_ADDRESS"
+# ] = "127.0.0.1:9669"  # assumed we have NebulaGraph installed locally
 
 @st.cache_data
 def set_llm(model_name):
@@ -48,17 +48,17 @@ def get_query_engine(file, persist, index_type):
                 index = load_index_from_storage(storage_context)
                 print("loading persist for wiki")
             query_engine = index.as_query_engine()
-        else:
-            graph_store = NebulaGraphStore(
-                space_name="ggwiki3",
-                edge_types=['relationship'],
-                rel_prop_names=['relationship'],
-                tags=['entity']
-            )
-            storage_context = StorageContext.from_defaults(graph_store=graph_store)
-            kg_index = KnowledgeGraphIndex(nodes=[], storage_context=storage_context)
-            query_engine = kg_index.as_query_engine()
-            print("loading from nebula database")
+        # else:
+        #     graph_store = NebulaGraphStore(
+        #         space_name="ggwiki3",
+        #         edge_types=['relationship'],
+        #         rel_prop_names=['relationship'],
+        #         tags=['entity']
+        #     )
+        #     storage_context = StorageContext.from_defaults(graph_store=graph_store)
+        #     kg_index = KnowledgeGraphIndex(nodes=[], storage_context=storage_context)
+        #     query_engine = kg_index.as_query_engine()
+        #     print("loading from nebula database")
     return query_engine
 
 def getPrompt(input):
@@ -80,7 +80,7 @@ if custom_file == "essay":
     persist = persist_essay
 else:
     persist = persist_website
-index_type = st.sidebar.selectbox("Index type", options=["vector", "graph"], index=0)
+index_type = st.sidebar.selectbox("Index type", options=["vector"], index=0)
 
 query_engine = get_query_engine(file=custom_file, persist=persist, index_type=index_type)
 
